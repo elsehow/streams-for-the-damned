@@ -1,0 +1,28 @@
+{
+  "name": "streams-for-the-damned",
+  "version": "0.0.0",
+  "description": "a tutorial on streams (the functional-reactive kind, whatever that means)",
+  "main": "keystream.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elsehow/streams-for-the-damned.git"
+  },
+  "keywords": [
+    "streams",
+    "FRP",
+    "kefir"
+  ],
+  "author": "elsehow",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elsehow/streams-for-the-damned/issues"
+  },
+  "homepage": "https://github.com/elsehow/streams-for-the-damned",
+  "dependencies": {
+    "jquery": "^2.1.4",
+    "kefir": "^2.7.2"
+  }
+}

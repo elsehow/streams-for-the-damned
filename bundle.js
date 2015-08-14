@@ -1,45 +1,32 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-$		= require('jquery')
-Kefir 		= require('kefir')
-rightKeycode	= 39
-leftKeycode	= 37
+var $		   = require('jquery')
+var Kefir	   = require('kefir')
 
-var pressStream = Kefir.fromEvents(document.body, 'keydown')
+//functions
+var keyFilter      = function (ev, keycode) { if (ev.which == keycode) return ev }
+var rightKeyFilter = function (ev) { return keyFilter(ev, 39) }
+var leftKeyFilter  = function (ev) { return keyFilter(ev, 37) }
+var one 	   = function (ev) { return 1 }
+var minusOne       = function (ev) { return -1 }
+var sum            = function (acc, cur) { return acc += cur }
+var leftGain       = function (pos) { return 100 - pos }
+var rightGain      = function (pos) { return pos }
 
-var leftStream = pressStream.filter(function (ev) {
-  if (ev.which == leftKeycode) return ev
-}).map(function (ev) { 
-  return -1 
+//main
+$(document).on('ready', function () {
+
+  //streams
+  var pressStream  = Kefir.fromEvents(document.body, 'keydown')
+  var leftStream   = pressStream.filter(leftKeyFilter).map(one)
+  var rightStream  = pressStream.filter(rightKeyFilter).map(minusOne)
+  var dotPosStream = Kefir.merge([leftStream, rightStream]).scan(sum, 50)
+ 
+  //side-effects
+  dotPosStream.onValue(function (pos)  { $('#dot').css('left', pos + '%') })
+  dotPosStream.map(leftGain).log('set left track gain!')
+  dotPosStream.map(rightGain).log('set right track gain!')
+
 })
-
-var rightStream = pressStream.filter(function (ev) {
-  if (ev.which == rightKeycode) return ev
-}).map(function (ev) {
-  return 1
-})
-
-var posStream = Kefir.merge([leftStream, rightStream])
-
-posStream = posStream.scan(function (acc, cur) {
-  return acc += cur
-}, 50)
-
-posStream.onValue(function (pos) {
-  $('#dot').css('left', pos + '%')
-})
-
-
-var leftGain = posStream.map(function (pos) {
-  return 100 - pos
-})
-
-var rightGain = posStream.map(function (pos) {
-  return pos
-})
-
-
-var sliderclick = Kefir.fromEvents($("#dot"), 'mousedown')
-sliderclick.log()
 
 },{"jquery":2,"kefir":3}],2:[function(require,module,exports){
 /*!

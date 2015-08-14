@@ -23,6 +23,7 @@
   "homepage": "https://github.com/elsehow/streams-for-the-damned",
   "dependencies": {
     "jquery": "^2.1.4",
-    "kefir": "^2.7.2"
+    "kefir": "^2.7.2",
+    "lodash": "^3.10.1"
   }
 }

@@ -18,8 +18,8 @@ var ajax = function (options) {
 
 //returns a promise for a GET to the query string
 var queryOpts = function (type, date) {
-   //assemble query string
    var url = 'https://www.quandl.com/api/v3/datasets/WIKI/AAPL.json?start_date=1985-05-01&end_date=1997-07-01&order=asc&column_index=4&collapse=quarterly&transformation=rdiff'
+   //assemble query string
    //var url = 'https://app.spire.io//api/events/' + type 
    //    //+ '?date=' + date 
    //    + '&access_token=' + access_token

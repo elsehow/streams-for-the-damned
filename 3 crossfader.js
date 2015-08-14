@@ -23,7 +23,7 @@ var setup = function () {
   dotPosStream.map(leftGain).log('set left track gain!')
   dotPosStream.map(rightGain).log('set right track gain!')
 
-})
+}
 
 //main 
 $(document).on('ready', setup)

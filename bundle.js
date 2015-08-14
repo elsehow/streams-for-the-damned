@@ -2,7 +2,6 @@
 var $		   = require('jquery')
 var Kefir	   = require('kefir')
 
-//functions
 var keyFilter      = function (ev, keycode) { if (ev.which == keycode) return ev }
 var rightKeyFilter = function (ev) { return keyFilter(ev, 39) }
 var leftKeyFilter  = function (ev) { return keyFilter(ev, 37) }
@@ -12,8 +11,7 @@ var sum            = function (acc, cur) { return acc += cur }
 var leftGain       = function (pos) { return 100 - pos }
 var rightGain      = function (pos) { return pos }
 
-//main
-$(document).on('ready', function () {
+var setup = function () {
 
   //streams
   var pressStream  = Kefir.fromEvents(document.body, 'keydown')
@@ -26,7 +24,10 @@ $(document).on('ready', function () {
   dotPosStream.map(leftGain).log('set left track gain!')
   dotPosStream.map(rightGain).log('set right track gain!')
 
-})
+}
+
+//main 
+$(document).on('ready', setup)
 
 },{"jquery":2,"kefir":3}],2:[function(require,module,exports){
 /*!

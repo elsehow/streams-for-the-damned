@@ -14,11 +14,16 @@ var rightStream = pressStream.filter(function (ev) {
   return 1
 })
 
-var posStream = Kefir.merge([leftStream, rightStream]).scan(function (acc, cur) {
-  return acc += cur
-}, 50)
 
-//side effect!
-posStream.onValue(function (pos) {
-  $('#dot').css('left', pos + '%')
-})
+
+
+
+
+//var posStream = Kefir.merge([leftStream, rightStream]).scan(function (acc, cur) {
+//  return acc += cur
+//}, 50)
+//
+////side effect!
+//posStream.onValue(function (pos) {
+//  $('#dot').css('left', pos + '%')
+//})

@@ -1,8 +1,10 @@
 var $ = require('jquery')
 var _ = require('lodash')
-var spireDataStream = require('./spireAPI.js')
+
+var apiResponseStream = require('./apiQuerier.js')
 
 var timeseries = function (ev) { return ev.dataset.data }
+
 var datapoint  = function (t, v) { 
   var h = v + "px"
   var style = 'height: ' + h + '; display: inline-block; width: 30px; background: #00ffff;'
@@ -21,14 +23,13 @@ var drawGraph = function (data, $container) {
 var setup = function (doc, dateStream) {
 
   //setup
-  var css = 'overflow-x: scroll; white-space: nowrap;'
-  var template = '<div id="graphContainer" style="' + css + '" ></div>'
+  var template = '<div id="graphContainer" style="overflow-x: scroll; white-space: nowrap;" ></div>'
   doc.write(template)
   var $c      = $('#graphContainer')
   var render  = function (data) { drawGraph(data, $c) }
 
   //streams
-  var breathStream = dateStream.flatMap(spireDataStream)
+  var breathStream = dateStream.flatMap(apiResponseStream)
 
   //side-effects
   breathStream.map(timeseries).onValue(render)

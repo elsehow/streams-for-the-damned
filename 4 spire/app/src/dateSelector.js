@@ -11,10 +11,11 @@ var setup = function (doc) {
   //streams
   var dateSelectorEvents  = Kefir.fromEvents($('#dateSelector'), 'change')
   var buttonClickStream   = Kefir.fromEvents($('#fetch'), 'click')
-  var dateSelectionStream = dateSelectorEvents.sampledBy(buttonClickStream).map(getSelectorDate)
 
-  //returns a stream of selected dates
-  return dateSelectionStream
+  //returns a stream of dates 
+  return dateSelectorEvents
+          .sampledBy(buttonClickStream)
+          .map(getSelectorDate)
 }
 
 module.exports = setup

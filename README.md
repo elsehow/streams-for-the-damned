@@ -16,8 +16,8 @@ If you think about it, the state of a software interface is a function of the ev
 
 ## This tutorial
 
-First, cd into this directory and `npm install`. (You'll need node and npm. you'll also need to `npm install -g browserify`).
+First, cd into this directory and `npm install`. (You'll need node and npm. You'll also need to `npm install -g browserify`).
 
-Go through each file in numberical order, 1, 2, 3, 4. For each file, `browserify [file] -o bundle.js` and open index.html in your browser.
+Go through each file in order, 1, 2, 3, 4. For each file, `browserify [file] -o bundle.js` and open index.html in your browser.
 
 For example 4, `cd 4\ spire` and ``browserify app/index.js -o bundle.js``

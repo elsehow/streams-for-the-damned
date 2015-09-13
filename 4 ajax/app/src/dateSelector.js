@@ -1,6 +1,6 @@
 var $ = require('jquery')
 var Kefir = require('kefir')
-var getSelectorDate = function (ev) { return ev.target.valueAsDate }
+var getSelectorDate = function (ev) { return ev.target.value }
 
 var setup = function (doc) {
 

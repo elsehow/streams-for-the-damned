@@ -1,8 +1,6 @@
 var $ = require('jquery')
 var _ = require('lodash')
 
-var apiResponseStream = require('./apiQuerier.js')
-
 var timeseries = function (ev) { return ev.dataset.data }
 
 var datapoint  = function (t, v) { 
@@ -20,16 +18,15 @@ var drawGraph = function (data, $container) {
   })
 }
 
-var setup = function (doc, dateStream) {
+var setup = function (doc, breathStream) {
 
-  //setup
+  //setup DOM
   var template = '<div id="graphContainer" style="overflow-x: scroll; white-space: nowrap;" ></div>'
   doc.write(template)
+
+  //setup render functions
   var $c      = $('#graphContainer')
   var render  = function (data) { drawGraph(data, $c) }
-
-  //streams
-  var breathStream = dateStream.flatMap(apiResponseStream)
 
   //side-effects
   breathStream.map(timeseries).onValue(render)
